@@ -87,6 +87,19 @@ public abstract class WorldRendererMixin {
 			method = "method_62214",
 			at = @At(
 				value = "INVOKE",
+				target = "Lnet/minecraft/util/profiler/Profiler;push(Ljava/lang/String;)V",
+				ordinal = 0,
+				shift = Shift.AFTER
+			)
+	)
+	private void beforeTerrainSolid(CallbackInfo ci) {
+		WorldRenderEvents.BEFORE_TERRAIN.invoker().beforeTerrain(context);
+	}
+
+	@Inject(
+			method = "method_62214",
+			at = @At(
+				value = "INVOKE",
 				target = "Lnet/minecraft/client/render/WorldRenderer;renderLayer(Lnet/minecraft/client/render/RenderLayer;DDDLorg/joml/Matrix4f;Lorg/joml/Matrix4f;)V",
 				ordinal = 2,
 				shift = Shift.AFTER

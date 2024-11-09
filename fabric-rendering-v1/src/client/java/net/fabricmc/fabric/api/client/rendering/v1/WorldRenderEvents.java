@@ -35,6 +35,7 @@ import net.fabricmc.fabric.api.event.EventFactory;
  * <p>The order of events each frame is as follows:
  * <ul><li>START
  * <li>AFTER_SETUP
+ * <li>BEFORE_TERRAIN
  * <li>BEFORE_ENTITIES
  * <li>AFTER_ENTITIES
  * <li>BEFORE_BLOCK_OUTLINE
@@ -72,6 +73,17 @@ public final class WorldRenderEvents {
 	public static final Event<AfterSetup> AFTER_SETUP = EventFactory.createArrayBacked(AfterSetup.class, context -> { }, callbacks -> context -> {
 		for (final AfterSetup callback : callbacks) {
 			callback.afterSetup(context);
+		}
+	});
+
+	/**
+	 * Called before the terrain layers are output to the framebuffer, but after the terrain shader fog has been set up.
+	 *
+	 * <p>Use to render before the terrain is drawn.
+	 */
+	public static final Event<BeforeTerrain> BEFORE_TERRAIN = EventFactory.createArrayBacked(BeforeTerrain.class, context -> { }, callbacks -> context -> {
+		for (final BeforeTerrain callback : callbacks) {
+			callback.beforeTerrain(context);
 		}
 	});
 
@@ -261,6 +273,11 @@ public final class WorldRenderEvents {
 	@FunctionalInterface
 	public interface AfterSetup {
 		void afterSetup(WorldRenderContext context);
+	}
+
+	@FunctionalInterface
+	public interface BeforeTerrain {
+		void beforeTerrain(WorldRenderContext context);
 	}
 
 	@FunctionalInterface
