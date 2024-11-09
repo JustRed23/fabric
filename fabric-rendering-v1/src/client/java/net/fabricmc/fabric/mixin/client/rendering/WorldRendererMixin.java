@@ -90,7 +90,7 @@ public abstract class WorldRendererMixin {
 				target = "Lnet/minecraft/util/profiler/Profiler;push(Ljava/lang/String;)V",
 				ordinal = 0,
 				shift = Shift.AFTER
-			)
+			) // Points to after profiler.push("terrain");
 	)
 	private void beforeTerrainSolid(CallbackInfo ci) {
 		WorldRenderEvents.BEFORE_TERRAIN.invoker().beforeTerrain(context);
