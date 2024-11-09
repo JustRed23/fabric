@@ -69,6 +69,8 @@ public final class WorldRenderEvents {
 	 * identified and rebuilt but before chunks are uploaded to GPU.
 	 *
 	 * <p>Use for setup of state that depends on view frustum.
+	 *
+	 * <b>Can NOT be used to render anything after MC 1.21.2 due to a glClear call, use {@link WorldRenderEvents#BEFORE_TERRAIN} instead.
 	 */
 	public static final Event<AfterSetup> AFTER_SETUP = EventFactory.createArrayBacked(AfterSetup.class, context -> { }, callbacks -> context -> {
 		for (final AfterSetup callback : callbacks) {
