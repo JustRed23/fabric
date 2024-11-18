@@ -35,7 +35,6 @@ import net.fabricmc.fabric.api.event.EventFactory;
  * <p>The order of events each frame is as follows:
  * <ul><li>START
  * <li>AFTER_SETUP
- * <li>BEFORE_TERRAIN
  * <li>BEFORE_ENTITIES
  * <li>AFTER_ENTITIES
  * <li>BEFORE_BLOCK_OUTLINE
@@ -69,23 +68,10 @@ public final class WorldRenderEvents {
 	 * identified and rebuilt but before chunks are uploaded to GPU.
 	 *
 	 * <p>Use for setup of state that depends on view frustum.
-	 *
-	 * <b>Can NOT be used to render anything after MC 1.21.2 due to a glClear call, use {@link WorldRenderEvents#BEFORE_TERRAIN} instead.</b>
 	 */
 	public static final Event<AfterSetup> AFTER_SETUP = EventFactory.createArrayBacked(AfterSetup.class, context -> { }, callbacks -> context -> {
 		for (final AfterSetup callback : callbacks) {
 			callback.afterSetup(context);
-		}
-	});
-
-	/**
-	 * Called before the terrain layers are output to the framebuffer, but after the terrain shader fog has been set up.
-	 *
-	 * <p>Use to render before the terrain is drawn.
-	 */
-	public static final Event<BeforeTerrain> BEFORE_TERRAIN = EventFactory.createArrayBacked(BeforeTerrain.class, context -> { }, callbacks -> context -> {
-		for (final BeforeTerrain callback : callbacks) {
-			callback.beforeTerrain(context);
 		}
 	});
 
