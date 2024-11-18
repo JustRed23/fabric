@@ -264,11 +264,6 @@ public final class WorldRenderEvents {
 	}
 
 	@FunctionalInterface
-	public interface BeforeTerrain {
-		void beforeTerrain(WorldRenderContext context);
-	}
-
-	@FunctionalInterface
 	public interface BeforeEntities {
 		void beforeEntities(WorldRenderContext context);
 	}
