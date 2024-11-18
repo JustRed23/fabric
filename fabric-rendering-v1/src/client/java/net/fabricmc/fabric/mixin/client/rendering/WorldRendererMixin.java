@@ -80,7 +80,6 @@ public abstract class WorldRendererMixin {
 	@Inject(method = "setupTerrain", at = @At("RETURN"))
 	private void afterTerrainSetup(Camera camera, Frustum frustum, boolean hasForcedFrustum, boolean spectator, CallbackInfo ci) {
 		context.setFrustum(frustum);
-		WorldRenderEvents.AFTER_SETUP.invoker().afterSetup(context);
 	}
 
 	@Inject(
@@ -93,7 +92,7 @@ public abstract class WorldRendererMixin {
 			) // Points to after profiler.push("terrain");
 	)
 	private void beforeTerrainSolid(CallbackInfo ci) {
-		WorldRenderEvents.BEFORE_TERRAIN.invoker().beforeTerrain(context);
+		WorldRenderEvents.AFTER_SETUP.invoker().afterSetup(context);
 	}
 
 	@Inject(
