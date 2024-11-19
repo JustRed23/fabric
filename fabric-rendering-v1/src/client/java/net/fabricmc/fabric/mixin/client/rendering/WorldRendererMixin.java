@@ -85,9 +85,9 @@ public abstract class WorldRendererMixin {
 	@Inject(
 			method = "method_62214",
 			at = @At(
-				value = "INVOKE",
+				value = "INVOKE_STRING",
 				target = "Lnet/minecraft/util/profiler/Profiler;push(Ljava/lang/String;)V",
-				ordinal = 0,
+				args = "ldc=terrain",
 				shift = Shift.AFTER
 			) // Points to after profiler.push("terrain");
 	)
